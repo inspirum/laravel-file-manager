@@ -33,24 +33,24 @@ class RequestValidator extends FormRequest
             'disk' => [
                 'sometimes',
                 'string',
-                function ($attribute, $value, $fail) use($config) {
-                    if (!in_array($value, $config->getDiskList()) ||
-                        !array_key_exists($value, config('filesystems.disks'))
-                    ) {
-                        return $fail('diskNotFound');
-                    }
-                },
+                // function ($attribute, $value, $fail) use($config) {
+                //     if (!in_array($value, $config->getDiskList()) ||
+                //         !array_key_exists($value, config('filesystems.disks'))
+                //     ) {
+                //         return $fail('diskNotFound');
+                //     }
+                // },
             ],
             'path' => [
                 'sometimes',
                 'string',
                 'nullable',
-                function ($attribute, $value, $fail) {
-                    if ($value && !Storage::disk($this->input('disk'))->exists($value)
-                    ) {
-                        return $fail('pathNotFound');
-                    }
-                },
+                // function ($attribute, $value, $fail) {
+                //     if ($value && !Storage::disk($this->input('disk'))->exists($value)
+                //     ) {
+                //         return $fail('pathNotFound');
+                //     }
+                // },
             ],
         ];
     }
