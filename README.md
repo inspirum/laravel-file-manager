@@ -64,65 +64,47 @@
 * Events (v2.2)
 * Thumbnails lazy load
 * Dynamic configuration (v2.4)
-* Supported locales : ru, en, ar, sr, cs, de, es, nl, zh_CN
+* Supported locales : ru, en, ar, sr, cs, de, es, nl, zh-CN, fa, it, tr, fr, pt-BR, zh-TW
 
-## In a new version 2.4
+## In a new version 2.5
 
-Now you can create your own config repositories, it will allow to change your configuration dynamically.
-
-How to do it:
-
-Create new class - example - TestConfigRepository
+You can change Route prefix (default - 'file-manager')
 
 ```php
-namespace App\Http;
-
-use Alexusmai\LaravelFileManager\Services\ConfigService\ConfigRepository;
-
-class TestConfigRepository implements ConfigRepository
-{
-    // implement all methods from interface
-}
+/**
+ * LFM Route prefix
+ * !!! WARNING - if you change it, you should compile frontend with new prefix(baseUrl) !!!
+ */
+'routePrefix' => 'file-manager',
 ```
 
-For example see [src/Services/ConfigService/DefaultConfigRepository.php](https://github.com/alexusmai/laravel-file-manager/blob/master/src/Services/ConfigService/DefaultConfigRepository.php)
+Open PDF files in a new tab (test) - use 'double-click'
 
-## Upgrading to version 2.4
+## Upgrading to version 2.5
 
-Update pre-compiled css and js files and config file - file-manager.php 
+Before updating the package, you may need to delete the settings file (config/file-manager.php) or you can add a new element to it:
+
+```php
+/**
+     * LFM Route prefix
+     * !!! WARNING - if you change it, you should compile frontend with new prefix(baseUrl) !!!
+     */
+    'routePrefix' => 'file-manager',
+
+```
+
+If you choose to delete - do not forget to backup your settings!
+
+Run composer update command.
+
+Update pre-compiled css and js files.
 
 
 ```php
-// config
-php artisan vendor:publish --tag=fm-config --force
-// js, css
 php artisan vendor:publish --tag=fm-assets --force
 ```
 
-If you use the ACL, now you don't need to add the acl middleware to configuration.
-
+And config file IF YOU DELETED IT !!!
 ```php
-//======= In old versions ==========
-'acl' => true,
-
-// add acl middleware to your array
-'middleware' => ['web', 'fm-acl'],
-
-//======= In a new version =========
-'acl' => true,
-
-'middleware' => ['web'],
+php artisan vendor:publish --tag=fm-assets --force
 ```
-
-## Thanks
-
-* Khalid Bj [D34DlyM4N](https://github.com/D34DlyM4N)
-* NeoSon [lkloon123](https://github.com/lkloon123)
-* Aleksandar Stevanović [aleks989](https://github.com/aleks989)
-* Aleš Nejdr [mige](https://github.com/mige)
-* Tobias Matthaiou [TumTum](https://github.com/TumTum)
-* Marc Garcia Torrent - [mgarcia96](https://github.com/mgarcia96)
-* Laurens - [Laussii078](https://github.com/Laussii078)
-* osindex - [osindex](https://github.com/osindex)
-
-

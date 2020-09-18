@@ -2,6 +2,7 @@
 
 namespace Alexusmai\LaravelFileManager\Controllers;
 
+use Alexusmai\LaravelFileManager\Events\BeforeInitialization;
 use Alexusmai\LaravelFileManager\Events\Deleting;
 use Alexusmai\LaravelFileManager\Events\DirectoryCreated;
 use Alexusmai\LaravelFileManager\Events\DirectoryCreating;
@@ -19,6 +20,8 @@ use Alexusmai\LaravelFileManager\FileManager;
 use Alexusmai\LaravelFileManager\Services\Zip;
 use Illuminate\Routing\Controller;
 use Illuminate\Http\Request;
+
+use function GuzzleHttp\Promise\all;
 
 class FileManagerController extends Controller
 {
@@ -44,6 +47,8 @@ class FileManagerController extends Controller
      */
     public function initialize()
     {
+        event(new BeforeInitialization());
+
         return response()->json(
             $this->fm->initialize()
         );

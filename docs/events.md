@@ -1,5 +1,19 @@
 # Events
 
+### BeforeInitialization
+
+> Alexusmai\LaravelFileManager\Events\BeforeInitialization
+
+Example:
+
+```php
+\Event::listen('Alexusmai\LaravelFileManager\Events\BeforeInitialization',
+    function ($event) {
+        
+    }
+);
+```
+
 ### DiskSelected
 
 > Alexusmai\LaravelFileManager\Events\DiskSelected
@@ -105,6 +119,7 @@ Example:
             $event->disk(),
             $event->newName(),
             $event->oldName(),
+            $event->type(), // 'file' or 'dir'
         ]);
     }
 );
